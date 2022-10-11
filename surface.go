@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/peterstace/simplefeatures/geom"
+	"github.com/uber/h3-go/v3"
 )
 
 type Layer struct {
@@ -29,7 +30,12 @@ type SurfaceV2Req struct {
 	Resolution uint8 `json:"resolution"`
 }
 
-func (c Client) SurfaceV2(ctx context.Context, req *SurfaceV2Req) (*Resp[SurfaceV2Req], error) {
+type SurfaceV2HexResp struct {
+	Hexes []h3.H3Index   `json:"hexes"`
+	Props map[string]any `json:"props"`
+}
+
+func (c Client) SurfaceV2(ctx context.Context, req *SurfaceV2Req) (*Resp[[]SurfaceV2HexResp], error) {
 	buf, err := json.Marshal(req)
 	if err != nil {
 		return nil, err
@@ -40,5 +46,5 @@ func (c Client) SurfaceV2(ctx context.Context, req *SurfaceV2Req) (*Resp[Surface
 		return nil, err
 	}
 
-	return apiReq[SurfaceV2Req](&c.HTTPClient, httpReq)
+	return apiReq[[]SurfaceV2HexResp](&c.HTTPClient, httpReq)
 }
