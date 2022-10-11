@@ -2,10 +2,9 @@ package asl
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
-	"io"
 	"net/http"
-	"net/url"
 
 	"github.com/peterstace/simplefeatures/geom"
 )
@@ -30,27 +29,16 @@ type SurfaceV2Req struct {
 	Resolution uint8 `json:"resolution"`
 }
 
-func (c Client) SurfaceV2(req *SurfaceV2Req) (*Resp[SurfaceV2Req], error) {
-	urlBase := c.BaseURL
-	if urlBase == "" {
-		// point to prod as a default
-		urlBase = "https://airhub-api.airspacelink.com"
-	}
-
-	uri, err := url.Parse(urlBase + "/v2/surface")
-	if err != nil {
-		return nil, err
-	}
-
+func (c Client) SurfaceV2(ctx context.Context, req *SurfaceV2Req) (*Resp[SurfaceV2Req], error) {
 	buf, err := json.Marshal(req)
 	if err != nil {
 		return nil, err
 	}
 
-	return apiReq[SurfaceV2Req](&c.HTTPClient, &http.Request{
-		Method: http.MethodPost,
-		URL:    uri,
-		Header: c.makeHeaders(),
-		Body:   io.NopCloser(bytes.NewBuffer(buf)),
-	})
+	httpReq, err := c.makeReq(ctx, http.MethodPost, "/v2/surface", bytes.NewBuffer(buf))
+	if err != nil {
+		return nil, err
+	}
+
+	return apiReq[SurfaceV2Req](&c.HTTPClient, httpReq)
 }

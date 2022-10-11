@@ -1,6 +1,7 @@
 package asl
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -23,7 +24,12 @@ func (c *Client) Authenticate() error {
 	return fmt.Errorf("not implemented")
 }
 
-func (c *Client) makeHeaders() map[string][]string {
+func (c *Client) makeReq(ctx context.Context, method string, path string, body io.Reader) (*http.Request, error) {
+	req, err := http.NewRequestWithContext(ctx, method, c.BaseURL+path, body)
+	if err != nil {
+		return nil, err
+	}
+
 	headers := make(map[string][]string, 2)
 	headers["Content-Type"] = []string{"application/json"}
 
@@ -31,7 +37,8 @@ func (c *Client) makeHeaders() map[string][]string {
 		headers["Authorization"] = []string{"Bearer " + t}
 	}
 
-	return headers
+	req.Header = headers
+	return req, nil
 }
 
 // apiReq will perform an HTTP request and then unmarshal the
