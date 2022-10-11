@@ -14,13 +14,7 @@ type Client struct {
 	HTTPClient http.Client
 
 	BaseURL string
-	token   string
-}
-
-// SetToken lets you override the token value if you decide
-// to cache it
-func (c *Client) SetToken(t string) {
-
+	Token   string
 }
 
 // Authenticate will grab a fresh JWT, replacing
@@ -33,7 +27,7 @@ func (c *Client) makeHeaders() map[string][]string {
 	headers := make(map[string][]string, 2)
 	headers["Content-Type"] = []string{"application/json"}
 
-	if t := c.token; t != "" {
+	if t := c.Token; t != "" {
 		headers["Authorization"] = []string{"Bearer " + t}
 	}
 

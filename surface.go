@@ -1,6 +1,9 @@
 package asl
 
 import (
+	"bytes"
+	"encoding/json"
+	"io"
 	"net/http"
 	"net/url"
 
@@ -39,10 +42,15 @@ func (c Client) SurfaceV2(req *SurfaceV2Req) (*Resp[SurfaceV2Req], error) {
 		return nil, err
 	}
 
+	buf, err := json.Marshal(req)
+	if err != nil {
+		return nil, err
+	}
+
 	return apiReq[SurfaceV2Req](&c.HTTPClient, &http.Request{
 		Method: http.MethodPost,
 		URL:    uri,
 		Header: c.makeHeaders(),
-		Body:   nil,
+		Body:   io.NopCloser(bytes.NewBuffer(buf)),
 	})
 }
