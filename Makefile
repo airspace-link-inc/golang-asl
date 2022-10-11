@@ -3,7 +3,7 @@
 TEST := CONFIG_ENV=test go test ./...
 
 fmt: ## Run gofmt over all go files
-	find . -iname *.go ! -path *.git* -exec gofmt -w -s {} \;
+	find . -iname "*.go" ! -path *.git* -exec gofmt -w -s {} \;
 
 update: ## Update dependencies
 	go get -u -d ./...
