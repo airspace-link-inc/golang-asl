@@ -31,10 +31,19 @@ func TestAuthenticate(mainTest *testing.T) {
 			expectedErr: "missing client ID or client secret",
 		},
 		{
-			name: "canceled context",
+			name: "missing subkey",
 			client: Client{
 				ClientID:     "something",
 				ClientSecret: "something",
+			},
+			expectedErr: "missing client ID or client secret",
+		},
+		{
+			name: "canceled context",
+			client: Client{
+				SubscriptionKey: "something",
+				ClientID:        "something",
+				ClientSecret:    "something",
 				BaseURL: httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 					w.Write([]byte(`{"message": "error never should happen"}`))
 				})).URL,
@@ -49,8 +58,9 @@ func TestAuthenticate(mainTest *testing.T) {
 		{
 			name: "HTTP 400",
 			client: Client{
-				ClientID:     "something",
-				ClientSecret: "something",
+				SubscriptionKey: "something",
+				ClientID:        "something",
+				ClientSecret:    "something",
 				BaseURL: httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 					w.WriteHeader(400)
 					w.Write([]byte(`{"message": "something invalid happened"}`))
@@ -61,8 +71,9 @@ func TestAuthenticate(mainTest *testing.T) {
 		{
 			name: "HTTP 500",
 			client: Client{
-				ClientID:     "something",
-				ClientSecret: "something",
+				SubscriptionKey: "something",
+				ClientID:        "something",
+				ClientSecret:    "something",
 				BaseURL: httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 					w.WriteHeader(500)
 					w.Write([]byte(`{"message": "something invalid happened (500)"}`))
@@ -73,8 +84,9 @@ func TestAuthenticate(mainTest *testing.T) {
 		{
 			name: "mock success",
 			client: Client{
-				ClientID:     "something",
-				ClientSecret: "something",
+				SubscriptionKey: "something",
+				ClientID:        "something",
+				ClientSecret:    "something",
 				BaseURL: httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 					w.WriteHeader(200)
 					w.Write([]byte(`{

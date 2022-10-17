@@ -12,8 +12,9 @@ import (
 )
 
 type Client struct {
-	ClientID     string
-	ClientSecret string
+	SubscriptionKey string
+	ClientID        string
+	ClientSecret    string
 
 	HTTPClient http.Client
 
@@ -34,8 +35,8 @@ func (t Token) Expired() bool {
 // Authenticate will grab a fresh JWT, replacing
 // the existing cached token
 func (c *Client) Authenticate(ctx context.Context, scopes ...string) error {
-	if c.ClientID == "" || c.ClientSecret == "" {
-		return fmt.Errorf("missing client ID or client secret")
+	if c.ClientID == "" || c.ClientSecret == "" || c.SubscriptionKey == "" {
+		return fmt.Errorf("missing client ID, client secret, or subscription key")
 	}
 
 	clientCredentials := url.Values{
@@ -58,6 +59,8 @@ func (c *Client) Authenticate(ctx context.Context, scopes ...string) error {
 	if err != nil {
 		return err
 	}
+
+	req.Header = http.Header{"x-api-key": []string{c.SubscriptionKey}}
 
 	auth0Resp, err := apiReq[Token](&c.HTTPClient, req)
 	if err != nil {
@@ -83,6 +86,10 @@ func (c *Client) makeReq(ctx context.Context, method string, path string, body i
 
 	if t := c.Token.AccessToken; t != "" {
 		headers["Authorization"] = []string{"Bearer " + t}
+	}
+
+	if subkey := c.SubscriptionKey; subkey != "" {
+		headers["x-api-key"] = []string{subkey}
 	}
 
 	req.Header = headers
