@@ -11,6 +11,8 @@ import (
 )
 
 func TestAuthenticate(mainTest *testing.T) {
+	missingSomething := "missing client ID, client secret, or subscription key"
+
 	testCases := []struct {
 		name        string
 		client      Client
@@ -21,14 +23,14 @@ func TestAuthenticate(mainTest *testing.T) {
 	}{
 		{
 			name:        "missing client ID",
-			expectedErr: "missing client ID or client secret",
+			expectedErr: missingSomething,
 		},
 		{
 			name: "missing client secret",
 			client: Client{
 				ClientID: "something",
 			},
-			expectedErr: "missing client ID or client secret",
+			expectedErr: missingSomething,
 		},
 		{
 			name: "missing subkey",
@@ -36,7 +38,7 @@ func TestAuthenticate(mainTest *testing.T) {
 				ClientID:     "something",
 				ClientSecret: "something",
 			},
-			expectedErr: "missing client ID or client secret",
+			expectedErr: missingSomething,
 		},
 		{
 			name: "canceled context",
