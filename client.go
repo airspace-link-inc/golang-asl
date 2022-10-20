@@ -1,6 +1,7 @@
 package asl
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -75,7 +76,16 @@ func (c *Client) Authenticate(ctx context.Context, scopes ...string) error {
 	return err
 }
 
-func (c *Client) makeReq(ctx context.Context, method string, path string, body io.Reader) (*http.Request, error) {
+func (c *Client) makeJSONReq(ctx context.Context, method, path string, body any) (*http.Request, error) {
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+
+	return c.makeReq(ctx, method, path, bytes.NewBuffer(buf))
+}
+
+func (c *Client) makeReq(ctx context.Context, method, path string, body io.Reader) (*http.Request, error) {
 	req, err := http.NewRequestWithContext(ctx, method, c.BaseURL+path, body)
 	if err != nil {
 		return nil, err

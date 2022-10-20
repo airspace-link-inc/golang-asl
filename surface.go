@@ -1,7 +1,6 @@
 package asl
 
 import (
-	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -82,12 +81,7 @@ func (s *SurfaceV2HexResp) UnmarshalJSON(buf []byte) error {
 }
 
 func (c Client) SurfaceV2(ctx context.Context, req *SurfaceV2Req) (*Resp[[]SurfaceV2HexResp], error) {
-	buf, err := json.Marshal(req)
-	if err != nil {
-		return nil, err
-	}
-
-	httpReq, err := c.makeReq(ctx, http.MethodPost, "/v2/surface", bytes.NewBuffer(buf))
+	httpReq, err := c.makeJSONReq(ctx, http.MethodPost, "/v2/surface", req)
 	if err != nil {
 		return nil, err
 	}
