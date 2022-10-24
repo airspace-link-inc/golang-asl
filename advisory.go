@@ -1,14 +1,6 @@
 package asl
 
-import (
-	"context"
-	"encoding/json"
-	"time"
-
-	"github.com/AnthonyHewins/dpm"
-	"github.com/peterstace/simplefeatures/geom"
-)
-
+/*
 // QueryAdvisoriesArgs is the payload passed to query advisories
 // via a POST or GET. Prefer using GET if possible, since it leverages
 // bounding box intersection which has a cheaper computation cost
@@ -113,3 +105,5 @@ func (a *Client) QueryAdvisoriesByGeom(ctx context.Context, args *QueryAdvisorie
 
 	return apiReq[[]Advisory](&a.HTTPClient, req)
 }
+
+*/

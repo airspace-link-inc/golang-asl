@@ -1,5 +1,6 @@
 package asl
 
+/*
 import (
 	"fmt"
 	"testing"
@@ -114,3 +115,5 @@ func TestMarshalJSON(mainTest *testing.T) {
 		}
 	}
 }
+
+*/

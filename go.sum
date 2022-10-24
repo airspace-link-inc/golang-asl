@@ -1,9 +1,5 @@
-github.com/AnthonyHewins/dpm v0.0.2 h1:4tGlPVYo4Am08Y2bGsMS6/1c5XYgDCinMtJF6lE9OcU=
-github.com/AnthonyHewins/dpm v0.0.2/go.mod h1:C2JLpkmTWggIsTsXn/fnxnaVSL/G85kdN7xHXgLmul4=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/goccy/go-reflect v1.1.0 h1:kiT3+exv9ULtdpawlMzCGT1y5bWOmuY3jgS86GB9t1s=
-github.com/goccy/go-reflect v1.1.0/go.mod h1:n0oYZn8VcV2CkWTxi8B9QjkCoq6GTtCEdfmR66YhFtE=
 github.com/peterstace/simplefeatures v0.40.0 h1:mqSoGsnPF77cQQ6QM8ssH97ub9XTO51EcpYosTuZXP8=
 github.com/peterstace/simplefeatures v0.40.0/go.mod h1:ub+e2WFVeYzriHxqjmSzW5yqp67KXPAgcUhtQb26ay0=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
@@ -13,8 +9,6 @@ github.com/stretchr/testify v1.4.0 h1:2E4SXV/wtOkTonXsotYi4li6zVWxYlZuYNCXe9XRJy
 github.com/stretchr/testify v1.4.0/go.mod h1:j7eGeouHqKxXV5pUuKE4zz7dFj8WfuZ+81PSLYec5m4=
 github.com/uber/h3-go v3.0.1+incompatible h1:RVpBm8qd7mM94YuIhNQfCXpVj6mPY6gNsVstDg1FvjY=
 github.com/uber/h3-go v3.0.1+incompatible/go.mod h1:66a2M4rQlf+dtkTWj3bHoLFgDT/Rt4kLT8dMuEQVQvw=
-github.com/uber/h3-go/v3 v3.7.1 h1:qGAnkRKXHeuaGuLDktcouROiNDE1PgZTgiZGMBwVnSc=
-github.com/uber/h3-go/v3 v3.7.1/go.mod h1:XS+EMzW0EmjL/aioQsvLIYJRtC7/lodai5l8SNmlYIs=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v2 v2.2.2 h1:ZCJp+EgiOT7lHqUV2J862kp8Qj64Jo6az82+3Td9dZw=

@@ -2,8 +2,6 @@ package asl
 
 import (
 	"encoding/json"
-	"fmt"
-	"reflect"
 
 	"github.com/uber/h3-go"
 )
@@ -21,45 +19,29 @@ type HexFeature struct {
 }
 
 func (s *HexFeature) UnmarshalJSON(buf []byte) error {
-	var m map[string]any
+	var m map[string]json.RawMessage
 	if err := json.Unmarshal(buf, &m); err != nil {
+		return err
+	} else if m == nil {
+		return nil
+	}
+
+	var props map[string]any
+	if err := json.Unmarshal(m["props"], &props); err != nil {
 		return err
 	}
 
-	props, ok := m["props"].(map[string]any)
-	if !ok {
-		return &json.UnmarshalTypeError{
-			Value:  "JSON object",
-			Type:   reflect.MapOf(reflect.TypeOf(""), reflect.TypeOf(props[""])),
-			Struct: "SurfaceV2HexResp",
-			Field:  "hexes",
-		}
+	var hexSlice []string
+	if err := json.Unmarshal(m["hexes"], &hexSlice); err != nil {
+		return err
 	}
+
+	hexes := make(map[h3.H3Index]bool, len(hexSlice))
+	for _, v := range hexSlice {
+		hexes[h3.FromString(v)] = true
+	}
+
 	s.Props = props
-
-	stringSlice, ok := m["hexes"].([]any)
-	if !ok {
-		return &json.UnmarshalTypeError{
-			Value:  "array of h3 indices (as strings)",
-			Type:   reflect.SliceOf(reflect.TypeOf("")),
-			Struct: "SurfaceV2HexResp",
-			Field:  "hexes",
-		}
-	}
-
-	hexes := make(map[h3.H3Index]bool, len(stringSlice))
-	for _, v := range stringSlice {
-		hexString, ok := v.(string)
-		if !ok {
-			return &json.MarshalerError{
-				Type: reflect.TypeOf(""),
-				Err:  fmt.Errorf("all elements in hexes must be strings"),
-			}
-		}
-
-		hexes[h3.FromString(hexString)] = true
-	}
-
 	s.Hexes = hexes
 	return nil
 }
