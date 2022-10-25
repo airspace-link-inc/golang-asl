@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/uber/h3-go"
+	"github.com/uber/h3-go/v3"
 )
 
 func TestHexFeatureMarshal(mainTest *testing.T) {

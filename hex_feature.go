@@ -3,7 +3,7 @@ package asl
 import (
 	"encoding/json"
 
-	"github.com/uber/h3-go"
+	"github.com/uber/h3-go/v3"
 )
 
 // HexFeature is an h3 equivalent of GeoJSON. It comes in very similar to a GeoJSON
