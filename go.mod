@@ -9,6 +9,7 @@ require (
 
 require (
 	github.com/davecgh/go-spew v1.1.0 // indirect
+	github.com/google/uuid v1.3.0
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/uber/h3-go/v3 v3.7.1
 	gopkg.in/yaml.v2 v2.2.2 // indirect
