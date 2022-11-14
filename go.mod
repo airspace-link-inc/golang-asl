@@ -7,6 +7,8 @@ require (
 	github.com/stretchr/testify v1.4.0
 )
 
+require github.com/google/go-querystring v1.1.0 // indirect
+
 require (
 	github.com/davecgh/go-spew v1.1.0 // indirect
 	github.com/google/uuid v1.3.0

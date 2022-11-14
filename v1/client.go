@@ -44,6 +44,7 @@ type Client struct {
 	Token    *TokenService
 	Surface  *SurfaceService
 	Check    *CheckService
+	Aviation *AviationService
 }
 
 func NewClient(httpClient *http.Client, baseURL, apiKey, clientID, clientSecret string) *Client {
@@ -69,6 +70,7 @@ func NewClient(httpClient *http.Client, baseURL, apiKey, clientID, clientSecret 
 	c.Token = &TokenService{client: c}
 	c.Surface = &SurfaceService{client: c}
 	c.Check = &CheckService{client: c}
+	c.Aviation = &AviationService{client: c}
 
 	return c
 }

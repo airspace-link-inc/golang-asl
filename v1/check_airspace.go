@@ -10,11 +10,11 @@ type CheckService service
 
 type CheckAirspaceOptions struct {
 	// GeoJSON formatted geometry. Available geometries may be a polygon.
-	Geometry  any       `json:"geometry"`
+	Geometry any `json:"geometry"`
 	// RFC3339 compliant start timestamp of the operation.
 	StartTime time.Time `json:"startTime"`
 	// RFC3339 compliant start timestamp of the operation.
-	EndTime   time.Time `json:"endTime"`
+	EndTime time.Time `json:"endTime"`
 }
 
 type AirspaceDetails struct {
