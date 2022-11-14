@@ -1,0 +1,2 @@
+# For now ignore tests because they contain secrets
+/v1/client_test.go
