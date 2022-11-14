@@ -14,7 +14,7 @@ import (
 var (
 	// Production URL
 	defalutBaseURL = "https://airhub-api.airspacelink.com"
-	sandboxURL = "https://airhub-api-sandbox.airspacelink.com"
+	sandboxURL     = "https://airhub-api-sandbox.airspacelink.com"
 )
 
 type service struct {
@@ -23,13 +23,13 @@ type service struct {
 
 type Client struct {
 	// API endpoint
-	// You can use the AirHub API in sandbox mode, which does not affect your live data or interact with production systems. 
+	// You can use the AirHub API in sandbox mode, which does not affect your live data or interact with production systems.
 	// The base URL you use to make requests determines whether the request is live mode or sandbox mode.
 	baseUrl *nurl.URL
-	// API key issued by ASL to interact with API 
+	// API key issued by ASL to interact with API
 	// Request access to the API by sending an email to developers@airspacelink.com.
-	apiKey  string
-	client  *http.Client
+	apiKey string
+	client *http.Client
 
 	// Auth token configs
 	clientID     string
@@ -43,6 +43,7 @@ type Client struct {
 	Advisory *AdvisoryService
 	Token    *TokenService
 	Surface  *SurfaceService
+	Check    *CheckService
 }
 
 func NewClient(httpClient *http.Client, baseURL, apiKey, clientID, clientSecret string) *Client {
@@ -67,6 +68,7 @@ func NewClient(httpClient *http.Client, baseURL, apiKey, clientID, clientSecret 
 	c.Advisory = &AdvisoryService{client: c}
 	c.Token = &TokenService{client: c}
 	c.Surface = &SurfaceService{client: c}
+	c.Check = &CheckService{client: c}
 
 	return c
 }

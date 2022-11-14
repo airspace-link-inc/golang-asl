@@ -8,9 +8,11 @@ import (
 )
 
 type CreateAdvisoryOptions struct {
-	Name             string `json:"name"`
-	GeoID            string `json:"geoId"`
-	CountryGeoID     string `json:"countryGeoID,omitempty"`
+	Name         string `json:"name"`
+	GeoID        string `json:"geoId"`
+	CountryGeoID string `json:"countryGeoID,omitempty"`
+	// // GeoJSON formatted geometry. Must be a point, line, or polygon.
+	// The resulting bounding box of the geometry can't have a side length greater than 100 miles.
 	Geometry         any    `json:"geom"`
 	AltitudeUpper    int    `json:"altitudeUpper"`
 	AltitudeLower    int    `json:"altitudeLower"`

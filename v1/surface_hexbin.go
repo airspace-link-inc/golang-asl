@@ -85,7 +85,7 @@ func (s *HexFeature) MarshalJSON() ([]byte, error) {
 // Generate a surface with any data sources you request.
 // Returns a hexbin payload that includes hexes contained within the area you specify in the geometry parameter.
 // For a GeoJSON response, use the Surface GeoJSON endpoint.
-func (ss *SurfaceService) Surface(ctx context.Context, opts *SurfaceHexbinOptions) ([]HexFeature, error) {
+func (ss *SurfaceService) Surface(ctx context.Context, opts SurfaceHexbinOptions) ([]HexFeature, error) {
 	url := fmt.Sprintf("%s/v2/surface", ss.client.baseUrl)
 
 	status, body, err := ss.client.post(ctx, url, opts, SurfaceTier1.String())
